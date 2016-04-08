@@ -1,0 +1,17 @@
+<ion-view view-title="Exercises" hide-back-button="false">
+  <ion-content>
+    <ion-list class="" show-delete="false" can-swipe="true">
+      <ion-item ng-repeat="exercise in workoutSessionSingle" class="item item-avatar">
+        <img src="./img/ionic.png">
+        <div class="listItems">
+          <h2>{{exercise.exerciseName}}</h2>
+          <p>Sets:
+            {{exercise.exerciseSets.length}}</p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <div class="bar bar-footer bar-positive">
+    <span ng-click="addExercise()" class="title">Neues Excercise</span>
+  </div>
+</ion-view>

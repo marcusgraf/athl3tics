@@ -1,0 +1,42 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Create Routine</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list list-inset">
+      <h5>Routine</h5>
+      <label class="item item-input">
+        <input type="text" placeholder="Name" ng-model="sessionObject.workoutSessionName">
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Color
+        </div>
+        {{sessionObject.workoutSessionColor}}
+        <select ng-model="sessionObject.workoutSessionColor">
+          <option value="#e53935" selected>Red</option>
+          <option value="#0c0040">Blue</option>
+          <option value="#06ae00">Green</option>
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Day
+        </div>
+        {{sessionObject.workoutSessionDay}}
+        <select ng-model="sessionObject.workoutSessionDay">
+          <option value="Mon" selected>Monday</option>
+          <option value="Tues">Tuesday</option>
+          <option value="Wed">Wednesday</option>
+          <option value="Thurs">Thursday</option>
+          <option value="Fri">Friday</option>
+          <option value="Sat">Saturday</option>
+          <option value="Sun">Sunday</option>
+        </select>
+      </label>
+    </div>
+  </ion-content>
+  <div class="bar bar-footer bar-positive">
+    <a href="#" ng-click="creatNewWorkoutSession()" class="title">Neues Workout</a>
+  </div>
+</ion-modal-view>

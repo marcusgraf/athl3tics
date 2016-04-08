@@ -1,0 +1,21 @@
+<ion-view view-title="Deine Workouts" hide-back-button="true">
+  <ion-content>
+
+    <ion-list class="workout-list list" show-delete="false" can-swipe="true">
+      <ion-item ng-repeat="workout in workoutList" class="workout-list-item item item-thumbnail-left" ui-sref="app.workoutSessionList({workoutID: workout.id})">
+        <img class="" src="{{workout.workoutImg}}">
+        <h2>{{workout.title}}</h2>
+        <p>Montag, Mittwoch, Freitag</p>
+        <ion-option-button class="button-positive icon ion-edit" ng-click="deleteUserWorkout(workout.id)"></ion-option-button>
+        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteUserWorkout(workout.id)"></ion-option-button>
+
+      </ion-item>
+    </ion-list>
+
+
+
+  </ion-content>
+  <div class="bar bar-footer bar-positive">
+    <span ion-ripple ng-click="creatNewUserWorkout()" class="title">Neues Workout</span>
+  </div>
+</ion-view>
