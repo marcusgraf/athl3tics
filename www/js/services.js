@@ -51,27 +51,20 @@ angular.module('athl3tics.services', [])
     },
     getWorkoutSingle: function(workoutID) {
       var deferred = $q.defer();
-      this.userWorkouts.forEach(function(workoutSingle) {
-        if (workoutSingle.id == workoutID) {
-          deferred.resolve(workoutSingle)
-        }
-      });
+      //this.userWorkouts.forEach(function(workoutSingle) {
+        //if (workoutSingle.id == workoutID) {
+          console.log(workoutID)
+          deferred.resolve(this.userWorkouts[workoutID])
+        //}
+      //});
 
       return deferred.promise
     },
     addWorkout: function(workout) {
       this.userWorkouts.push(workout);
     },
-    deleteWorkout: function(workoutID) {
-      var tmpWorkoutList = this.userWorkouts;
-
-      for (var i = 0; i < tmpWorkoutList.length; i++) {
-        if (tmpWorkoutList[i].id == workoutID) {
-          tmpWorkoutList.splice(i, 1);
-        }
-      }
-
-      this.userWorkouts = tmpWorkoutList;
+    deleteWorkout: function(workout) {
+      this.userWorkouts.splice(this.userWorkouts.indexOf(workout), 1);
     },
     addWorkoutSession: function(workoutID, sessionObject) {
       var tmpWorkoutList = this.userWorkouts;

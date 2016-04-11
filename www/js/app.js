@@ -66,8 +66,9 @@ angular.module('athl3tics', [
       }
     },
     resolve: {
-      workoutSingle: function($stateParams, UserWorkoutService) {
-        return UserWorkoutService.getWorkoutSingle($stateParams.workoutID)
+      workoutSessionList: function($stateParams, UserWorkoutService) {
+        console.log($stateParams.workoutIndex);
+        //return UserWorkoutService.getWorkoutSingle($stateParams.index)
       }
     }
   })

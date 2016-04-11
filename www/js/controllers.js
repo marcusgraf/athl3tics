@@ -1,7 +1,15 @@
 angular.module('athl3tics.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $http) {
-  console.log("AppCtrl");
+  // Get exercises -> http://athl3tics.de/api-workout-v1/
+  var url = "http://athl3tics.de/api-workout-v1/";
+  $http.get(url, {
+    cache: 'true'
+  })
+  .then(function(response) {
+    console.log(response);
+  });
+
   // Form data for the registration modal
 
   /*var url = "http://athl3tics.de/api-exercise-v1/"
@@ -30,6 +38,16 @@ angular.module('athl3tics.controllers', [])
 .controller('WorkoutListCtrl', function($scope, $ionicPopup, workoutList, UserWorkoutService) {
 
   $scope.workoutList = workoutList;
+
+  console.log(workoutList);
+
+  $scope.moveItem = function(item, fromIndex, toIndex) {
+    //Move the item in the array
+    $scope.workoutList.splice(fromIndex, 1);
+    $scope.workoutList.splice(toIndex, 0, item);
+
+    console.log($scope.workoutList);
+  };
 
   $scope.creatNewUserWorkout = function() {
     $scope.newWorkout = {};
@@ -66,8 +84,8 @@ angular.module('athl3tics.controllers', [])
     });
   }
 
-  $scope.deleteUserWorkout = function(workoutID) {
-    UserWorkoutService.deleteWorkout(workoutID);
+  $scope.deleteUserWorkout = function(workout) {
+    UserWorkoutService.deleteWorkout(workout);
   }
 
 
