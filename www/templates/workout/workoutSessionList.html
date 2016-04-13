@@ -1,7 +1,7 @@
 <ion-view view-title="Trainingsplan" hide-back-button="false">
   <ion-content>
     <ion-list class="workout-list" show-delete="false" can-swipe="true">
-      <ion-item ng-repeat="session in workoutSingle.workoutSessions" class="item item-avatar" ui-sref="app.workoutSessionSingle({workoutID: workoutID,sessionName:session.workoutSessionName})">
+      <ion-item ng-repeat="session in workoutSingle.workoutSessions" class="item item-avatar" href="#/app/workout/workoutSessionSingle/{{workoutID}}/{{$index}}">
         <img src="./img/ionic.png">
         <div class="listItems">
           <h2>{{session.workoutSessionName}}</h2>

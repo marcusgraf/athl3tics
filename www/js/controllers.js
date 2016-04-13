@@ -2,13 +2,13 @@ angular.module('athl3tics.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $http) {
   // Get exercises -> http://athl3tics.de/api-workout-v1/
-  var url = "http://athl3tics.de/api-workout-v1/";
+  /*var url = "http://athl3tics.de/api-workout-v1/";
   $http.get(url, {
     cache: 'true'
   })
   .then(function(response) {
     console.log(response);
-  });
+  });*/
 
   // Form data for the registration modal
 
@@ -38,8 +38,6 @@ angular.module('athl3tics.controllers', [])
 .controller('WorkoutListCtrl', function($scope, $ionicPopup, workoutList, UserWorkoutService) {
 
   $scope.workoutList = workoutList;
-
-  console.log(workoutList);
 
   $scope.moveItem = function(item, fromIndex, toIndex) {
     //Move the item in the array
@@ -111,12 +109,9 @@ angular.module('athl3tics.controllers', [])
 
   $scope.creatNewUserWorkout = function() {
     $scope.modal.show();
-
-    // console.log("abcxyz");
   };
 
   $scope.creatNewWorkoutSession = function() {
-
     if ($scope.sessionObject.workoutSessionName) {
       UserWorkoutService.addWorkoutSession($scope.workoutID, $scope.sessionObject);
       $scope.modal.hide();
@@ -126,9 +121,10 @@ angular.module('athl3tics.controllers', [])
   }
 })
 
-.controller('WorkoutSessionSingleCtrl', function($scope, $stateParams, exerciseList, UserWorkoutService) {
-  $scope.exerciseList = exerciseList;
-  console.log($scope.exerciseList);
+.controller('WorkoutSessionSingleCtrl', function($scope, workoutSessionSingle) {
+  $scope.workoutSessionSingle = workoutSessionSingle;
+
+  console.log(workoutSessionSingle);
 
   $scope.addExercise = function() {
     console.log();

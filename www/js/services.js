@@ -1,10 +1,8 @@
 angular.module('athl3tics.services', [])
 
 .service('UserWorkoutService', function($q) {
-  return {
-    userWorkouts: [{
+   var userWorkouts = [{
       title: '3 Split',
-      id: 1,
       workoutImg: 'http://www.uebungen.ws/wp-content/uploads/2011/09/Unterarm-Curls-mit-der-Langhantel-Untergriff.jpg',
       workoutSessions: [{
         workoutSessionName: 'Montag',
@@ -31,40 +29,32 @@ angular.module('athl3tics.services', [])
       }]
     }, {
       title: 'Kraftausdauer Teil 1',
-      id: 2,
       workoutImg: 'http://www.uebungen.ws/wp-content/uploads/2011/09/Unterarm-Curls-vor-dem-Körper1.jpg'
     }, {
       title: 'Kraftausdauer Teil 2',
-      id: 3,
       workoutImg: 'http://www.uebungen.ws/wp-content/uploads/2011/09/Hammercurls.jpg'
     }, {
       title: '7 Minuten Training',
-      id: 4,
       workoutImg: 'http://www.uebungen.ws/wp-content/uploads/2011/09/Seitheben-an-der-Flachbank.jpg'
     }, {
       title: 'Workout Zuhause',
-      id: 5,
       workoutImg: 'http://www.uebungen.ws/wp-content/uploads/2011/09/Criss-Cross.jpg'
-    }],
-    getWorkoutList: function() {
-      return this.userWorkouts
-    },
-    getWorkoutSingle: function(workoutID) {
-      var deferred = $q.defer();
-      //this.userWorkouts.forEach(function(workoutSingle) {
-        //if (workoutSingle.id == workoutID) {
-          console.log(workoutID)
-          deferred.resolve(this.userWorkouts[workoutID])
-        //}
-      //});
+  }];
 
-      return deferred.promise
+  return {
+    getWorkoutList: function() {
+      return userWorkouts
+    },
+    getWorkoutSessionList: function(workoutID) {
+      var deferred = $q.defer();
+      deferred.resolve(userWorkouts[workoutID]);
+      return deferred.promise;
     },
     addWorkout: function(workout) {
-      this.userWorkouts.push(workout);
+      userWorkouts.push(workout);
     },
     deleteWorkout: function(workout) {
-      this.userWorkouts.splice(this.userWorkouts.indexOf(workout), 1);
+      userWorkouts.splice(userWorkouts.indexOf(workout), 1);
     },
     addWorkoutSession: function(workoutID, sessionObject) {
       var tmpWorkoutList = this.userWorkouts;
@@ -73,7 +63,7 @@ angular.module('athl3tics.services', [])
       //   workoutSessionName: sessionObject
       // };
 
-      this.userWorkouts.forEach(function(workoutSingle) {
+      userWorkouts.forEach(function(workoutSingle) {
         if (workoutSingle.id == workoutID) {
           if (!workoutSingle.workoutSessions)
             workoutSingle.workoutSessions = [];
@@ -81,12 +71,12 @@ angular.module('athl3tics.services', [])
         }
       });
 
-      this.userWorkouts = tmpWorkoutList;
+      userWorkouts = tmpWorkoutList;
 
-      console.log(this.userWorkouts);
+      console.log(userWorkouts);
     },
     deleteSession: function(workoutID, sessionName) {
-      var tmpWorkoutList = this.userWorkouts;
+      var tmpWorkoutList = userWorkouts;
       for (var i = 0; i < tmpWorkoutList.length; i++) {
         if (tmpWorkoutList[i].id == workoutID) {
           if (tmpWorkoutList[i].workoutSessions) {
@@ -100,8 +90,11 @@ angular.module('athl3tics.services', [])
         }
       }
     },
-    getExerciseList: function(workoutID, workoutSession) {
-      var tempWorkouts = this.userWorkouts;
+    getExerciseList: function(workoutID, sessionID) {
+      var deferred = $q.defer();
+      deferred.resolve(userWorkouts[workoutID].workoutSessions[sessionID]);
+      return deferred.promise;
+      /*var tempWorkouts = userWorkouts;
       var ExerciseList = [];
       tempWorkouts.forEach(function(workout) {
         if (workout.id = workoutID) {
@@ -114,10 +107,10 @@ angular.module('athl3tics.services', [])
           }
         }
       })
-      return ExerciseList;
+      return ExerciseList;*/
     },
     addNewExercise: function(workoutID, workoutSessionName, ExerciseObject) {
-      var tempWorkouts = this.userWorkouts;
+      var tempWorkouts = userWorkouts;
       tempWorkouts.forEach(function(workout) {
         if (workoutID == workout.id) {
           if (workout.workoutSessions) {

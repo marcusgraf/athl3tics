@@ -2,7 +2,7 @@
   <ion-content>
 
     <ion-list class="workout-list list" show-delete="false" can-swipe="true">
-      <ion-item ng-repeat="workout in workoutList" class="workout-list-item item item-thumbnail-left" ui-sref="app.workoutSessionList({workoutIndex: workout.index})">
+      <ion-item ng-repeat="workout in workoutList" class="workout-list-item item item-thumbnail-left" href="#/app/workout/workoutList/{{$index}}">
         <img class="" src="{{workout.workoutImg}}">
         <h2>{{workout.title}}</h2>
         <p>Montag, Mittwoch, Freitag</p>

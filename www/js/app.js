@@ -58,7 +58,7 @@ angular.module('athl3tics', [
   })
 
   .state('app.workoutSessionList', {
-    url: "/workout/workoutSessionList/:workoutID",
+    url: "/workout/workoutList/:workoutID",
     views: {
       'menuContent': {
         templateUrl: "templates/workout/workoutSessionList.html",
@@ -66,15 +66,14 @@ angular.module('athl3tics', [
       }
     },
     resolve: {
-      workoutSessionList: function($stateParams, UserWorkoutService) {
-        console.log($stateParams.workoutIndex);
-        //return UserWorkoutService.getWorkoutSingle($stateParams.index)
+      workoutSingle: function($stateParams, UserWorkoutService) {
+        return UserWorkoutService.getWorkoutSessionList($stateParams.workoutID)
       }
     }
   })
 
   .state('app.workoutSessionSingle',{
-    url:'/workout/WorkoutSessionSingleCtrl/:workoutID?sessionName',
+    url:'/workout/workoutSessionSingle/:workoutID/:sessionID',
     views: {
       'menuContent': {
         templateUrl: "templates/workout/workoutSessionSingle.html",
@@ -82,26 +81,11 @@ angular.module('athl3tics', [
       }
     },
     resolve: {
-      exerciseList : function($stateParams,UserWorkoutService) {
-        return UserWorkoutService.getExerciseList($stateParams.workoutID,$stateParams.sessionName)
+      workoutSessionSingle : function($stateParams,UserWorkoutService) {
+        return UserWorkoutService.getExerciseList($stateParams.workoutID,$stateParams.sessionID)
       }
     }
   })
-
-  // .state('app.workout-new', {
-  //   url: "/workout/workout-new",
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: "templates/workout/workout-single.html",
-  //       controller: 'WorkoutSingleCtrl'
-  //     }
-  //   },
-  //   resolve: {
-  //     workoutSingle: function($stateParams, UserWorkoutService) {
-  //       return UserWorkoutService.getWorkoutSingle($stateParams.workoutID)
-  //     }
-  //   }
-  // })
 
   $urlRouterProvider.otherwise('app/workout/workoutList');
 })
