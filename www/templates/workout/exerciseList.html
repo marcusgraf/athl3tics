@@ -1,0 +1,17 @@
+<ion-view view-title="Deine Workouts" hide-back-button="true">
+  <ion-content>
+
+    <ion-list class="workout-list list">
+      <ion-item ng-repeat="exercise in exerciseList" class="workout-list-item item item-thumbnail-left" ng-click="addExerciseToWorkout(exercise.id)">
+        <img class="" src="{{exercise.exerciseImg}}">
+        <h2>{{exercise.title}}</h2>
+      </ion-item>
+    </ion-list>
+
+
+
+  </ion-content>
+  <div class="bar bar-footer bar-positive">
+    <span ion-ripple ng-click="creatNewUserWorkout()" class="title">Neues Workout</span>
+  </div>
+</ion-view>

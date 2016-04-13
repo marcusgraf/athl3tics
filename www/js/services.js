@@ -94,38 +94,34 @@ angular.module('athl3tics.services', [])
       var deferred = $q.defer();
       deferred.resolve(userWorkouts[workoutID].workoutSessions[sessionID]);
       return deferred.promise;
-      /*var tempWorkouts = userWorkouts;
-      var ExerciseList = [];
-      tempWorkouts.forEach(function(workout) {
-        if (workout.id = workoutID) {
-          if (workout.workoutSessions) {
-            workout.workoutSessions.forEach(function(session) {
-              if (session.workoutSessionName == workoutSession) {
-                ExerciseList = session.workoutExerciseList;
-              }
-            })
-          }
-        }
-      })
-      return ExerciseList;*/
     },
-    addNewExercise: function(workoutID, workoutSessionName, ExerciseObject) {
-      var tempWorkouts = userWorkouts;
-      tempWorkouts.forEach(function(workout) {
-        if (workoutID == workout.id) {
-          if (workout.workoutSessions) {
-            workout.workoutSessions.forEach(function(session) {
-              if (session.workoutSessionName == workoutSessionName) {
-                if (!session.workoutExerciseList) {
-                  session.workoutExerciseList = [];
-                }
-                session.workoutExerciseList.push(ExerciseObject)
-              }
-            })
-          }
-        }
-      })
+    addNewExercise: function(workoutID, sessionID, exerciseID) {
+      var exerciseObject = {
+        exerciseID: "Trizep",
+        exerciseSets: [20, 12, 8]
+      };
+
+      userWorkouts[workoutID].workoutSessions[sessionID].workoutExerciseList.push(exerciseObject);
     }
   }
+})
 
+.service('ExerciseService', function($q) {
+  var exerciseList = [{
+    id: 1,
+    title: 'Push Ups',
+    exerciseImg: 'http://www.uebungen.ws/wp-content/uploads/2011/09/Unterarm-Curls-vor-dem-Körper1.jpg'
+  }, {
+    id: 2,
+    title: 'Benchpress',
+    exerciseImg: 'http://www.uebungen.ws/wp-content/uploads/2011/09/Unterarm-Curls-vor-dem-Körper1.jpg'
+  }];
+
+  return {
+    getExerciseList: function(){
+      var deferred = $q.defer();
+      deferred.resolve(exerciseList);
+      return deferred.promise;
+    }
+  }
 })

@@ -89,7 +89,7 @@ angular.module('athl3tics.controllers', [])
 
 })
 
-.controller('WorkoutSessionList', function($scope, workoutSingle, UserWorkoutService, $ionicModal, $stateParams) {
+.controller('WorkoutSessionList', function($scope, $stateParams, $ionicModal, workoutSingle, UserWorkoutService) {
   $scope.workoutSingle = workoutSingle;
   $scope.sessionObject = {};
 
@@ -121,12 +121,21 @@ angular.module('athl3tics.controllers', [])
   }
 })
 
-.controller('WorkoutSessionSingleCtrl', function($scope, workoutSessionSingle) {
+.controller('WorkoutSessionSingleCtrl', function($scope, $state, $stateParams, workoutSessionSingle) {
+  console.log();
+
   $scope.workoutSessionSingle = workoutSessionSingle;
 
-  console.log(workoutSessionSingle);
-
   $scope.addExercise = function() {
-    console.log();
+    $state.go('app.exerciseList', {workoutID: $stateParams.workoutID, sessionID: $stateParams.sessionID});
+  };
+})
+
+.controller('ExerciseListCtrl', function($scope, $state, $stateParams, exerciseList, UserWorkoutService) {
+  $scope.exerciseList = exerciseList;
+
+  $scope.addExerciseToWorkout = function() {
+    UserWorkoutService.addNewExercise($stateParams.workoutID, $stateParams.sessionID, 1234)
+    $state.go('app.workoutSessionSingle', {workoutID: $stateParams.workoutID, sessionID: $stateParams.sessionID});
   };
 });

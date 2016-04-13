@@ -87,5 +87,20 @@ angular.module('athl3tics', [
     }
   })
 
+    .state('app.exerciseList',{
+      url:'/workout/workoutSessionSingle/:workoutID/:sessionID/exerciseList',
+      views: {
+        'menuContent': {
+          templateUrl: "templates/workout/exerciseList.html",
+          controller: 'ExerciseListCtrl'
+        }
+      },
+      resolve: {
+        exerciseList : function($stateParams, ExerciseService) {
+          return ExerciseService.getExerciseList()
+        }
+      }
+    })
+
   $urlRouterProvider.otherwise('app/workout/workoutList');
 })
